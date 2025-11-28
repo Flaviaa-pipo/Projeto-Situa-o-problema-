@@ -1,0 +1,23 @@
+# SITUAÇÃO-PROBLEMA:
+# Uma loja vende camisetas por R$ 35 cada.
+# Na compra de 3 ou mais camisetas, o cliente recebe 20% de desconto no total.
+
+preco_camiseta = 35.0
+
+# Entrada do usuário
+quantidade = int(input("Quantas camisetas deseja comprar? "))
+
+# Cálculo sem desconto
+total = quantidade * preco_camiseta
+
+# Verificação do desconto
+if quantidade >= 3:
+    desconto = total * 0.20
+    total_final = total - desconto
+    print(f"Você comprou {quantidade} camisetas e ganhou 20% de desconto.")
+    print(f"Valor sem desconto: R${total:.2f}")
+    print(f"Desconto aplicado: R${desconto:.2f}")
+    print(f"Valor final: R${total_final:.2f}")
+else:
+    print(f"Você comprou {quantidade} camisetas.")
+    print(f"Valor final: R${total:.2f}")
