@@ -1,1 +1,94 @@
-# Projeto-Situa-o-problema-
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculadora de Desconto - Camisetas</title>
+  <style>
+    :root{font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#222}
+    body{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f6f8fa}
+    .card{background:white;padding:24px;border-radius:12px;box-shadow:0 6px 20px rgba(20,30,40,0.06);width:380px;max-width:92%}
+    h1{margin:0 0 8px;font-size:20px}
+    p.subtitle{margin:0 0 18px;color:#555;font-size:14px}
+    label{display:block;font-size:13px;margin-bottom:6px}
+    input[type=number]{width:100%;padding:10px;border-radius:8px;border:1px solid #dfe3e8;font-size:15px}
+    button{margin-top:12px;width:100%;padding:10px;border-radius:9px;border:0;background:#2563eb;color:white;font-weight:600;cursor:pointer}
+    .result{margin-top:14px;padding:12px;border-radius:8px;background:#f1f5f9;border:1px solid #e6eefc;color:#0f172a}
+    .small{font-size:13px;color:#444}
+    .muted{color:#6b7280;font-size:13px}
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <h1>Calculadora de desconto — Camisetas</h1>
+    <p class="subtitle">Preço unitário: <strong>R$ 35,00</strong>. Compras de <strong>3 ou mais</strong> ganham <strong>20% de desconto</strong> no total.</p>
+
+    <form id="form" onsubmit="return false;" aria-label="Calculadora de desconto de camisetas">
+      <label for="qty">Quantidade de camisetas</label>
+      <input id="qty" name="qty" type="number" min="0" step="1" value="1" required aria-required="true" />
+
+      <button id="calc">Calcular valor final</button>
+    </form>
+
+    <div id="output" class="result" aria-live="polite">
+      <div class="small">Preencha a quantidade e pressione <strong>Calcular valor final</strong>.</div>
+    </div>
+
+   
+  <script>
+    // Configurações do problema
+    const PRECO_UNIT = 35.0; // em reais
+    const QTD_DESC_MIN = 3;  // quantidade mínima para desconto
+    const TAXA_DESC = 0.20;  // 20% de desconto
+
+    // Elementos
+    const form = document.getElementById('form');
+    const qtyInput = document.getElementById('qty');
+    const output = document.getElementById('output');
+    const btn = document.getElementById('calc');
+
+    // Formatação para reais (pt-BR)
+    function formatBRL(value) {
+      return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function calcular() {
+      const qtd = Number(qtyInput.value);
+
+      if (!Number.isFinite(qtd) || qtd < 0) {
+        output.innerHTML = '<div class="small">Quantidade inválida. Insira 0 ou mais.</div>';
+        return;
+      }
+
+      const totalSemDesc = qtd * PRECO_UNIT;
+
+      if (qtd >= QTD_DESC_MIN) {
+        const desconto = totalSemDesc * TAXA_DESC;
+        const totalFinal = totalSemDesc - desconto;
+
+        output.innerHTML = `
+          <div><strong>Quantidade:</strong> ${qtd}</div>
+          <div><strong>Valor sem desconto:</strong> ${formatBRL(totalSemDesc)}</div>
+          <div><strong>Desconto (20%):</strong> ${formatBRL(desconto)}</div>
+          <div style="margin-top:8px;font-size:16px"><strong>Valor final:</strong> ${formatBRL(totalFinal)}</div>
+        `;
+      } else {
+        output.innerHTML = `
+          <div><strong>Quantidade:</strong> ${qtd}</div>
+          <div style="margin-top:8px;font-size:16px"><strong>Valor final:</strong> ${formatBRL(totalSemDesc)}</div>
+          <div class="muted" style="margin-top:6px">Compre ${QTD_DESC_MIN} ou mais para receber 20% de desconto.</div>
+        `;
+      }
+    }
+
+    // Eventos
+    btn.addEventListener('click', calcular);
+
+    // Permite calcular também ao pressionar Enter no campo
+    qtyInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); calcular(); } });
+
+    // Calcula valor inicial
+    calcular();
+  </script>
+</body>
+</html>
