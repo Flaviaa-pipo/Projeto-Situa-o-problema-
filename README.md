@@ -4,32 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Calculadora de Desconto - Camisetas</title>
-  <style>
-    :root{font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#222}
-    body{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f6f8fa}
-    .card{background:white;padding:24px;border-radius:12px;box-shadow:0 6px 20px rgba(20,30,40,0.06);width:380px;max-width:92%}
-    h1{margin:0 0 8px;font-size:20px}
-    p.subtitle{margin:0 0 18px;color:#555;font-size:14px}
-    label{display:block;font-size:13px;margin-bottom:6px}
-    input[type=number]{width:100%;padding:10px;border-radius:8px;border:1px solid #dfe3e8;font-size:15px}
-    button{margin-top:12px;width:100%;padding:10px;border-radius:9px;border:0;background:#2563eb;color:white;font-weight:600;cursor:pointer}
-    .result{margin-top:14px;padding:12px;border-radius:8px;background:#f1f5f9;border:1px solid #e6eefc;color:#0f172a}
-    .small{font-size:13px;color:#444}
-    .muted{color:#6b7280;font-size:13px}
-  </style>
+  
 </head>
 <body>
   <main class="card" role="main">
     <h1>Calculadora de desconto — Camisetas</h1>
     <p class="subtitle">Preço unitário: <strong>R$ 35,00</strong>. Compras de <strong>3 ou mais</strong> ganham <strong>20% de desconto</strong> no total.</p>
-
     <form id="form" onsubmit="return false;" aria-label="Calculadora de desconto de camisetas">
       <label for="qty">Quantidade de camisetas</label>
       <input id="qty" name="qty" type="number" min="0" step="1" value="1" required aria-required="true" />
-
       <button id="calc">Calcular valor final</button>
     </form>
-
     <div id="output" class="result" aria-live="polite">
       <div class="small">Preencha a quantidade e pressione <strong>Calcular valor final</strong>.</div>
     </div>
