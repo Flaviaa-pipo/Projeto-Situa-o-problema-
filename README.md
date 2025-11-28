@@ -1,5 +1,4 @@
-<!doctype html>
-<html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -18,20 +17,17 @@
     <div id="output" class="result" aria-live="polite">
       <div class="small">Preencha a quantidade e pressione <strong>Calcular valor final</strong>.</div>
     </div>
-
    
   <script>
     // Configurações do problema
     const PRECO_UNIT = 35.0; // em reais
     const QTD_DESC_MIN = 3;  // quantidade mínima para desconto
     const TAXA_DESC = 0.20;  // 20% de desconto
-
     // Elementos
     const form = document.getElementById('form');
     const qtyInput = document.getElementById('qty');
     const output = document.getElementById('output');
     const btn = document.getElementById('calc');
-
     // Formatação para reais (pt-BR)
     function formatBRL(value) {
       return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -44,13 +40,11 @@
         output.innerHTML = '<div class="small">Quantidade inválida. Insira 0 ou mais.</div>';
         return;
       }
-
       const totalSemDesc = qtd * PRECO_UNIT;
 
       if (qtd >= QTD_DESC_MIN) {
         const desconto = totalSemDesc * TAXA_DESC;
         const totalFinal = totalSemDesc - desconto;
-
         output.innerHTML = `
           <div><strong>Quantidade:</strong> ${qtd}</div>
           <div><strong>Valor sem desconto:</strong> ${formatBRL(totalSemDesc)}</div>
@@ -65,13 +59,10 @@
         `;
       }
     }
-
     // Eventos
     btn.addEventListener('click', calcular);
-
     // Permite calcular também ao pressionar Enter no campo
     qtyInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') { e.preventDefault(); calcular(); } });
-
     // Calcula valor inicial
     calcular();
   </script>
